@@ -2,7 +2,7 @@ import { TickerItemData } from "@/lib/data-types";
 import { useEffect, useState } from "react";
 
 const API_CRYPTO_PRICES_URL = 'http://localhost:3001/api/crypto-prices';
-const INTERVAL = 5000;
+const INTERVAL = 30000;
 
 function mapPrices(cryptoAsset) {
     const prices = cryptoAsset.crypto_prices;
