@@ -60,6 +60,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <div className="container mx-auto px-4 py-8">
+        <div className="overflow-hidden">
         {/* New Strategies Advertisement */}
         <div className="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 p-1">
           <div className="bg-background rounded-xl p-6">
@@ -431,6 +432,7 @@ const Dashboard = () => {
         {/* Ticker Bar */}
         <div className="mt-8">
           <TickerBar />
+        </div>
         </div>
       </div>
     </div>
