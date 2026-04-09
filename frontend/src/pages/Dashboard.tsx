@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { TrendingUp, Users, Target, Award, Activity, BarChart3, Zap, TrendingDown, ArrowRight, Sparkles, Rocket, Crown } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import TickerBar from '@/components/ticker-bar/TickerBar';
 
 const Dashboard = () => {
   const [user, setUser] = useState<any>(null);
@@ -426,6 +427,11 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Ticker Bar */}
+        <div className="mt-8">
+          <TickerBar />
+        </div>
       </div>
     </div>
   );
