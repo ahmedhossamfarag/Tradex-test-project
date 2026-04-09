@@ -18,7 +18,7 @@ const HoverChart = ({ data }: {data: TickerItemData}) => {
       <div className="w-72 bg-[#0d1120] border border-white/[0.10] rounded-2xl shadow-2xl overflow-hidden">
         <div
           className="h-[2px]"
-          style={{background: 'linear-gradient(90deg, transparent, rgb(239, 68, 68), transparent)'}}
+          style={{background: `linear-gradient(90deg, transparent, ${change_percent > 0 ? 'rgb(18, 191, 100)' : 'rgb(239, 68, 68)'}, transparent)`}}
         ></div>
         <div className="px-4 pt-3 pb-1">
           <div className="flex items-center justify-between">
