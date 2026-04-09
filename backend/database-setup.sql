@@ -53,6 +53,24 @@ CREATE TABLE IF NOT EXISTS discussion_likes (
   UNIQUE(discussion_id, user_id)
 );
 
+-- Create crypto assets table
+CREATE TABLE IF NOT EXISTS crypto_assets (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  crypto TEXT NOT NULL,
+  traditional TEXT NOT NULL,
+  UNIQUE(crypto, traditional)
+);
+
+-- Create crypto prices table
+CREATE TABLE IF NOT EXISTS crypto_prices (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  crypto_asset_id UUID NOT NULL REFERENCES crypto_assets(id) ON DELETE CASCADE,
+  time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  price DECIMAL NOT NULL,
+  UNIQUE(crypto_asset_id, time)
+);
+
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_discussions_user_id ON discussions(user_id);
 CREATE INDEX IF NOT EXISTS idx_discussions_created_at ON discussions(created_at DESC);
