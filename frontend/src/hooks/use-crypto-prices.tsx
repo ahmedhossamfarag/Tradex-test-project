@@ -18,8 +18,36 @@ function mapPrices(cryptoAsset) {
 }
 
 
+async function createWSSClient(onMessage: (data) => void) {
+    console.log('Creating WSS client...');
+    const ws = new WebSocket('ws://localhost:3001');
+    console.log('WSS connecting...');
+
+    ws.addEventListener('error', console.error);
+
+    ws.onopen = () => {
+        console.log('connected');
+    };
+
+    ws.onclose = () => {
+        console.log('disconnected');
+    };
+
+    ws.onmessage = function message(event) {
+        const payload = event.data;
+        const data = JSON.parse(payload)
+        onMessage(data);
+    };
+}
+
+
 export function useCryptoPrices() {
     const [prices, setPrices] = useState<TickerItemData[]>([]);
+
+    const updatePrices = (data) => {
+        const prices = data.cryptoPrices.map((asset) => mapPrices(asset));
+        setPrices(prices);
+    }
 
     const fetchCryptoPrices = async function () {
         const response = await fetch(API_CRYPTO_PRICES_URL);
@@ -30,12 +58,12 @@ export function useCryptoPrices() {
 
         const data = await response.json();
 
-        const prices = data.cryptoPrices.map((asset) => mapPrices(asset));
-
-        setPrices(prices);
+        updatePrices(data);
     }
 
     useEffect(() => {
+        createWSSClient(updatePrices);
+
         fetchCryptoPrices();
 
         const interval = setInterval(fetchCryptoPrices, INTERVAL);
