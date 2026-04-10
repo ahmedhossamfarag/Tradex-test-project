@@ -8,7 +8,7 @@ async function getPayload() {
 }
 
 function initCryptoPricesBroadcastService() {
-    const task = cron.schedule('*/3 * * * * *', async () => {
+    const task = cron.schedule('* * * * *', async () => {
         console.log('Sending crypto prices...');
         const payload = await getPayload();
         if (payload) sendToAll(payload);

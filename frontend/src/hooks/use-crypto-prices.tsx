@@ -65,10 +65,6 @@ export function useCryptoPrices() {
         createWSSClient(updatePrices);
 
         fetchCryptoPrices();
-
-        const interval = setInterval(fetchCryptoPrices, INTERVAL);
-
-        return () => clearInterval(interval);
     }, []);
 
     return { prices };
